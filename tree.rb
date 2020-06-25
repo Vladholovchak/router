@@ -5,11 +5,16 @@ class Trie
   end
 
   def add_route(hash)
-    parts = hash[:route].split('/')
+    key = ""
+    hash.keys.each do |k|
+      key = k
+    end
+    p key
+    parts = hash[:"#{key}"].split('/')
     base = @root
     name = ''
     parts.each do |part|
-      name = hash[:name] if parts.last == part
+      name = key if parts.last == part
       base = add_part(name, part, base.next)
     end
   end

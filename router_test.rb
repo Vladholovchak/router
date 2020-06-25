@@ -11,20 +11,20 @@ class RouterTest < Minitest::Test
     @trie = Trie.new()
   end
 
-  def test_match
-    assert_equal({ match: {}}, @trie.parse("/match"))
-  end
+  # def test_match
+  #   assert_equal({ match: {}}, @trie.parse("/match"))
+  # end
+  #
+  # def test_player
+  #   assert_equal({player: {id: 1}}, @trie.parse("/player/1"))
+  # end
+  #
+  # def test_player_info
+  #   assert_equal({player_info: {id: 2}}, @trie.parse("/player/2/info"))
+  # end
 
-  def player
-    assert_equal({player: {id: 1}}, @trie.parse("/player/1"))
-  end
-
-  def player_info
-    assert_equal({player_info: {id: 2}}, @trie.parse("/player/2/info"))
-  end
-
-  def add_obj
-    @trie.add(match: "/match")
+  def test_add_obj
+    @trie.add_route(match: "/match")
     assert @trie.class == Trie
   end
 
