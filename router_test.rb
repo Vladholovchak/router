@@ -1,7 +1,8 @@
 
 # router.rb
 require 'minitest/autorun'
-require_relative 'router'
+require_relative 'node'
+require_relative 'tree'
 
 class RouterTest < Minitest::Test
 
@@ -15,16 +16,16 @@ class RouterTest < Minitest::Test
   end
 
   def player
-    assert_equal "#{{player: {id: 1}}}", @trie.parse("/player/1"),"should return a object with 'player'"
+    assert_equal({player: {id: 1}}, @trie.parse("/player/1"))
   end
 
   def player_info
-    assert_equal "#{{player_info: {id: 2}}}", @trie.parse("/player/2/info"),"should return a object with 'player_info'"
+    assert_equal({player_info: {id: 2}}, @trie.parse("/player/2/info"))
   end
 
   def add_obj
-    @tree.add(match: "/match")
-    assert @tree.class == Tree
+    @trie.add(match: "/match")
+    assert @trie.class == Trie
   end
 
   def add_route

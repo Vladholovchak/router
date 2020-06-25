@@ -1,11 +1,11 @@
 class Node
   attr_reader :value, :next
-  attr_accessor :route
+  attr_accessor :dynamic
 
-  def initialize( value, name = '', dynamic = false)
+  def initialize( value, name = '', dynamic =false)
     @name = name
     @value = value
-    @next = []
     @dynamic = dynamic
+    @next = []
   end
 end
