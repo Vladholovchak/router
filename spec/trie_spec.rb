@@ -1,0 +1,98 @@
+
+require_relative '../node'
+require_relative '../trie'
+require_relative 'spec_helper'
+
+describe Trie do
+  before :each do
+    @trie = Trie.new
+  end
+
+  describe :add_route do
+
+    it 'returns Node when add route in the trie' do
+      @trie.add_route('match': '/match')
+      @trie.root.class == Node
+    end
+
+
+    describe "node" do
+      it "is dynamic" do
+        @trie.add_route('player':'/:id')
+        expect(@trie.root.next[0].next[0].dynamic).to be true
+      end
+      it "is static" do
+        @trie.add_route('player':'/player')
+        expect(@trie.root.next[0].next[0].dynamic).to be false
+      end
+      it "has a name, when it end of route" do
+        @trie.add_route('player':'/player/more')
+        expect(@trie.root.next[0].next[0].next[0].name).to be :player
+      end
+
+      it "hasn't a name, when it not end of route" do
+        @trie.add_route('player':'/player/more')
+        expect(@trie.root.next[0].next[0].name).to be nil
+      end
+    end
+
+    describe :add_child do
+      it "add child to trie and its node" do
+        @trie = Trie.new
+        @trie.root.add_child('player_more', 'more', @trie.root.next)
+        expect(@trie.root.next[0].class). to be Node
+      end
+    end
+
+  end
+
+
+  # it 'returns nil if route is nil'do
+  #   @trie.add_route('player_more': '').to raise_error()
+  # end
+  #
+  # it 'returns nil if key is nil'do
+  #   @trie.add_route('': 'role/:id').to raise_error()
+  # end
+  #
+  # it 'returns nil if  string'do
+  #   @trie.add_route('role/:id').to raise_error(NoMethodError)
+  # end
+
+
+  # def test_add
+  #   @trie.add_route('match': 'match')
+  #   refute_empty @trie
+  # end
+  #
+  # def test_trie_class
+  #   @trie.add_route(match: "/match")
+  #   assert @trie.class == Trie
+  # end
+  #
+  # def add_route
+  #
+  # end
+  #
+  # def clean_route
+  #
+  # end
+  #
+  # def find_route
+  #
+  # end
+
+  # def test_match
+  #   assert_equal({ match: {}}, @trie.parse("/match"))
+  # end
+  #
+  # def test_player
+  #   assert_equal({player: {id: 1}}, @trie.parse("/player/1"))
+  # end
+  #
+  # def test_player_info
+  #   assert_equal({player_info: {id: 2}}, @trie.parse("/player/2/info"))
+  # end
+  #
+
+end
