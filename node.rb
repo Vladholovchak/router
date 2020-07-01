@@ -9,16 +9,20 @@ class Node
   end
 
   def dynamic?(value)
-    value.chars[0] == ':' ? (@dynamic = true) : (@dynamic = false)
+    value.chars[0] == ':'
   end
 
-  def add_part(name, part, trie)
-    trie.find {|n| n.value == part} || add_child(name, part, trie)
+  def add_part(name, part, parent)
+    parent.find {|n| n.value == part} || create_child(name, part, parent)
   end
 
-  def add_child(name, part, trie)
-    child = Node.new(part, name)  # Node.new(part, name).tap {|new_node| trie << new_node }
-    trie << child
+  def create_child(name,part, parent)
+    child = Node.new(part, name)
+    add_child(child, parent)
     child
+  end
+
+  def add_child(child, parent)
+    parent << child
   end
 end

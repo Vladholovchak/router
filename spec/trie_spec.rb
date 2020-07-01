@@ -17,6 +17,14 @@ describe Trie do
 
 
     describe "node" do
+
+      it "add child" do
+        @root = Node.new('/')
+        @node = Node.new('player', 'player')
+        @root.add_child(@node, @root.next)
+        expect(@root.next[0]).to be @node
+      end
+
       it "is dynamic" do
         @trie.add_route('player':'/:id')
         expect(@trie.root.next[0].next[0].dynamic).to be true
@@ -36,10 +44,10 @@ describe Trie do
       end
     end
 
-    describe :add_child do
+    describe :create_child do
       it "add child to trie and its node" do
         @trie = Trie.new
-        @trie.root.add_child('more', 'more', @trie.root.next)
+        @trie.root.create_child('player_more', 'player', @trie.root.next)
         expect(@trie.root.next[0].class). to eq Node
       end
     end
@@ -99,9 +107,12 @@ describe Trie do
   #
   # end
 
-  # def test_match
-  #   assert_equal({ match: {}}, @trie.parse("/match"))
-  # end
+  describe do
+    it 'find name of parsed route in Trie' do
+      @trie.add_route('match': '/match')
+      expect(@trie.parse("/match")).to eq :match
+    end
+  end
   #
   # def test_player
   #   assert_equal({player: {id: 1}}, @trie.parse("/player/1"))
