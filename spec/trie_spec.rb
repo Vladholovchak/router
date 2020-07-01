@@ -39,9 +39,26 @@ describe Trie do
     describe :add_child do
       it "add child to trie and its node" do
         @trie = Trie.new
-        @trie.root.add_child('player_more', 'more', @trie.root.next)
-        expect(@trie.root.next[0].class). to be Node
+        @trie.root.add_child('more', 'more', @trie.root.next)
+        expect(@trie.root.next[0].class). to eq Node
       end
+    end
+
+    describe :add_part do
+
+      it "call  add_child which creates new Node in parent Node" do
+        @trie = Trie.new
+        @trie.root.add_part('', 'player', @trie.root.next)
+        (@trie.root.add_part('more', 'more', @trie.root.next[0].next))
+        expect(@trie.root.next[0].value).to eq 'player' and expect(@trie.root.next[0].next[0].value).to eq 'more'
+      end
+
+      it "find same value and returns that Node" do
+        @trie.root.add_part('more', 'more', @trie.root.next)
+        @trie.root.add_part('more', 'more', @trie.root.next)
+        expect(@trie.root.next[0].next[0]).to be nil
+      end
+
     end
 
   end

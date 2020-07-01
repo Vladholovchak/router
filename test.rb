@@ -10,3 +10,5 @@ trie.add_route({
                })
 
 p trie
+
+# trie.parse('player/:id')

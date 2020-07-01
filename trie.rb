@@ -16,4 +16,19 @@ class Trie
       end
     end
   end
+
+  # def parse(route)
+  #   parts = route.split('/')
+  #   base    = @root
+  #   route_found = ''
+  #   parts.all? do |part|
+  #     base = find_part(part, base.next)
+  #   end
+  #   base
+  # end
+  #
+  # def find_part(part, trie)
+  #   trie.find { |n| n.value == part }
+  # end
+
 end
