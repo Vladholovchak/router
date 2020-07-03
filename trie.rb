@@ -20,14 +20,27 @@ class Trie
   def parse(route)
     parts = route.split('/')
     base    = @root
+    ids = []
+    result = {'id': ids}
     parts.all? do |part|
-      base = find_part(part, base.next)
+      base, result = find_part(part,base.next,result)
     end
-    base.name
+    # result
+    final_result = {}
+    final_result.store(result[:name], {'id': result[:id]})
+    final_result
   end
 
-  def find_part(part, trie)
-    trie.find { |n| n.value == part }
+  def find_part(part, base, result)
+    base.each do |n|
+      if n.dynamic
+        result[:id] << part
+        result[:name] = n.name
+        return n, result
+      elsif n.value == part
+         result[:name] = n.name
+        return n, result
+      end
+    end
   end
-
 end

@@ -5,11 +5,8 @@ trie = Trie.new
 
 trie.add_route({
                'match': 'match/',
-               'player': 'player/:id',
-               # 'player_more': 'player/:id/more/:id'
+               'player': 'player/:id/',
+               'player_info': 'player/:id/:id'
                })
 
-trie
-
-p trie.parse('match/')
-p trie.parse('player/:id')
+p trie.parse('player/1/5')
