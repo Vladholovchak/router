@@ -9,4 +9,4 @@ trie.add_route({
                'player_info': 'player/:id/:id'
                })
 
-p trie.parse('player/1/5')
+p trie.parse('/user/')

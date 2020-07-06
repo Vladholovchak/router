@@ -22,11 +22,13 @@ class Trie
     base    = @root
     ids = []
     result = {'id': ids}
-    parts.all? do |part|
+    parts.each do |part|
       base, result = find_part(part,base.next,result)
     end
-    # result
     final_result = {}
+    if result.nil?
+      return  {}
+    end
     final_result.store(result[:name], {'id': result[:id]})
     final_result
   end
@@ -39,7 +41,8 @@ class Trie
         return n, result
       elsif n.value == part
          result[:name] = n.name
-        return n, result
+         return n, result
+      else
       end
     end
   end

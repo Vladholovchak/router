@@ -110,7 +110,8 @@ describe Trie do
   describe do
     it 'find name of parsed route in Trie' do
       @trie.add_route('match': '/match')
-      expect(@trie.parse("/match")).to eq :match
+      result = @trie.parse("/match")
+      expect(result.keys).to eq [:match]
     end
   end
   #
