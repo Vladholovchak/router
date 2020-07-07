@@ -1,0 +1,3 @@
+{'about': '/about/',
+ 'player_info': '/player/:id/'
+}

@@ -8,7 +8,7 @@ class Trie
 
   def add_route(hash)
     hash.keys.each do |k|
-      parts = hash[k.to_sym].split('/')
+      parts = hash[k].split('/')
       base = @root
       parts.each do |part|
         name = k if parts.last == part
@@ -25,25 +25,26 @@ class Trie
     parts.each do |part|
       base, result = find_part(part,base.next,result)
     end
-    final_result = {}
-    if result.nil?
-      return  {}
-    end
-    final_result.store(result[:name], {'id': result[:id]})
-    final_result
+    result_object(result)
   end
+
+  private
 
   def find_part(part, base, result)
     base.each do |n|
-      if n.dynamic
-        result[:id] << part
-        result[:name] = n.name
+      if n.dynamic?
+        result[:'id'] << part
+        result[:'name'] = n.name
         return n, result
       elsif n.value == part
-         result[:name] = n.name
+         result[:'name'] = n.name
          return n, result
-      else
       end
     end
+  end
+
+  def result_object(result)
+      return  Result.new if result.nil? or result.class == Node #
+      Result.new(result[:name].to_s,result[:id])
   end
 end
