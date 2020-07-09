@@ -4,10 +4,9 @@ require_relative '../lib/result'
 
 trie = Trie.new
 
-trie.add_route({
-               'match': '/about/',
-               'player_id': '/player/:id/'
-               })
+ trie.add_route( player_id: 'player/:id', match: 'match')
 
-trie.parse('/about/')
-trie.parse('/player/2')
+
+ p trie.parse('match/')
+ p trie.parse('user/5')
+ p trie.parse('player/5')

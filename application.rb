@@ -5,13 +5,12 @@ require_relative 'routes_reader'
 require_relative 'controller'
 
 reader = RoutesReader.new
-reader.read_route
 trie = Trie.new
 trie.add_route(reader.route)
-action = trie.parse('/about/')
+action = trie.parse(ARGV[0])
 
-if action.ids.empty?
+if action.params.empty?
   Controller.new.method(action.name).call
 else
-  Controller.new.method(action.name).call(action.ids)
+  Controller.new.method(action.name).call(action.params)
 end

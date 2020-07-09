@@ -1,9 +1,9 @@
 class Result
 
-  attr_reader :name, :ids
+  attr_reader :name, :params
 
-  def initialize(name = '', ids= '')
+  def initialize(name = '', params= '')
     @name = name
-    @ids = ids
+    @params = params
   end
 end

@@ -12,5 +12,4 @@ class RoutesReader
      YAML.load_file('routes.yml')
   end
 
-
 end

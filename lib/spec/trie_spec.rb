@@ -27,20 +27,20 @@ describe Trie do
       end
 
       it "is dynamic" do
-        @trie.add_route('player':'/:id')
+        @trie.add_route(player:'/:id')
         expect(@trie.root.next[0].next[0].dynamic).to be true
       end
       it "is static" do
-        @trie.add_route('player':'/player')
+        @trie.add_route(player:'/player')
         expect(@trie.root.next[0].next[0].dynamic).to be false
       end
       it "has a name, when it end of route" do
-        @trie.add_route('player':'/player/more')
+        @trie.add_route(player:'/player/more')
         expect(@trie.root.next[0].next[0].next[0].name).to be :player
       end
 
       it "hasn't a name, when it not end of route" do
-        @trie.add_route('player':'/player/more')
+        @trie.add_route(player:'/player/more')
         expect(@trie.root.next[0].next[0].name).to be nil
       end
     end
@@ -100,7 +100,7 @@ describe Trie do
 
   describe do
     it 'find name of parsed route in Trie' do
-      @trie.add_route('match': '/match')
+      @trie.add_route(match: '/match')
       result = @trie.parse("/match")
       expect(result.name).to eq 'match'
     end
@@ -109,22 +109,21 @@ describe Trie do
   describe :parse do
     it 'return Result object' do
       @trie = Trie.new
-      @trie.add_route('match': '/match')
+      @trie.add_route(match: '/match')
       expect(@trie.parse("/match").class).to eq Result
     end
 
     it "return name and id when route exist" do
       @trie = Trie.new
-      @trie.add_route('player_id': '/player/:id')
+      @trie.add_route(player_id: '/player/:id')
       res =@trie.parse('/player/5')
       expect(res.name).to eq 'player_id'
     end
 
     it "return empty Result object when route doesn't exist" do
       @trie = Trie.new
-      @trie.add_route('user_info': '/user/:id')
-      res = @trie.parse('/player/')   # if '/player/5' got exception
-      p res
+      @trie.add_route({user_info: 'user/:id'})
+      res = @trie.parse('player/5')   # if '/player/5' got exception
       expect(res.name).to eq ''
     end
   end

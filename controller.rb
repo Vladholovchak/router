@@ -4,6 +4,6 @@ class Controller
   end
 
   def player_info(id)
-    puts id
+    puts "id = #{id}"
   end
 end
