@@ -1,4 +1,6 @@
 source "https://rubygems.org"
 
-gem "rspec"
+gem 'rspec'
 gem 'rubocop'
+gem 'rack'
+gem 'pry'

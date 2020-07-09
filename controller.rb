@@ -1,9 +1,9 @@
 class Controller
-  def about
-    puts 'my info'
+  def about(params)
+    ['my info']
   end
 
-  def player_info(id)
-    puts "id = #{id}"
+  def player_info(params)
+    ["#{params}"]
   end
 end
