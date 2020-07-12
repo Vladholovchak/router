@@ -24,6 +24,7 @@ class Trie
     result = {params: params}
     parts.each do |part|
         base, result = find_part(part,base.next,result)
+        result.class == Node ? result = nil : result
         break if base.nil? or result.nil?
     end
     result_object(result)
@@ -52,6 +53,6 @@ class Trie
   end
 
   def result_object(result)
-      result.nil? ? Result.new : Result.new(result[:name].to_s, result[:params])
+      result.nil?  ? Result.new : Result.new(result[:name].to_s, result[:params])
   end
 end
