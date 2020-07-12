@@ -1,9 +1,9 @@
 class PlayersController
   def index(params)
-    ['my info']
+    ['players']
   end
 
-  #def show(params)
-   # ["#{params}"]
- # end
+  def show(params)
+    ["player: #{params}"]
+  end
 end
