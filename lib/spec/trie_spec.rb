@@ -28,20 +28,20 @@ describe Trie do
 
       it "is dynamic" do
         @trie.add_route(player:'/:id')
-        expect(@trie.root.next[0].next[0].dynamic).to be true
+        expect(@trie.root.next[0].dynamic).to be true
       end
       it "is static" do
         @trie.add_route(player:'/player')
-        expect(@trie.root.next[0].next[0].dynamic).to be false
+        expect(@trie.root.next[0].dynamic).to be false
       end
       it "has a name, when it end of route" do
         @trie.add_route(player:'/player/more')
-        expect(@trie.root.next[0].next[0].next[0].name).to be :player
+        expect(@trie.root.next[0].next[0].name).to be :player
       end
 
       it "hasn't a name, when it not end of route" do
         @trie.add_route(player:'/player/more')
-        expect(@trie.root.next[0].next[0].name).to be nil
+        expect(@trie.root.next[0].name).to be nil
       end
     end
 
@@ -101,7 +101,9 @@ describe Trie do
   describe do
     it 'find name of parsed route in Trie' do
       @trie.add_route(match: '/match')
-      result = @trie.parse("/match")
+      p @trie
+      result = @trie.parse('/match')
+      p result
       expect(result.name).to eq 'match'
     end
   end

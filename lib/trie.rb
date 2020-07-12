@@ -8,7 +8,7 @@ class Trie
 
   def add_route(hash)
     hash.keys.each do |k|
-      parts = hash[k].split('/')
+      parts = form_parts hash[k]
       base = @root
       parts.each do |part|
         name = k if parts.last == part
@@ -18,21 +18,29 @@ class Trie
   end
 
   def parse(route)
-    parts = route.split('/')
-    base    = @root
+    parts = form_parts route
+    base   = @root
     params = []
     result = {params: params}
     parts.each do |part|
-      base, result = find_part(part,base.next,result)
+        base, result = find_part(part,base.next,result)
+        break if base.nil? or result.nil?
     end
     result_object(result)
   end
 
   private
 
+
+  def form_parts(route)
+    parts = route.split('/')
+    parts.delete("")
+    parts
+  end
+
   def find_part(part, base, result)
     base.each do |n|
-      if n.dynamic? and result != nil and result.class != Node   #
+      if n.dynamic? and  result.class != Node   #
         result[:params] << part
         result[:name] = n.name
         return n, result
@@ -44,7 +52,6 @@ class Trie
   end
 
   def result_object(result)
-      return  Result.new if result.nil? or result.class == Node  #
-      Result.new(result[:name].to_s, result[:params])
+      result.nil? ? Result.new : Result.new(result[:name].to_s, result[:params])
   end
 end
