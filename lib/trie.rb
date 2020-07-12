@@ -3,7 +3,7 @@ class Trie
   attr_reader :root
 
   def initialize
-    @root = Node.new('/')
+    @root = Node.new('')
   end
 
   def add_route(hash)

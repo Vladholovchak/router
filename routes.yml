@@ -1,3 +1,5 @@
-{'about': '/about/',
- 'player_info': '/player/:id/'
+{'players#index': '/players/all',
+ 'players#show': '/players/:id/info',
+ 'items#index': '/items/all',
+ 'items#show': '/items/:id/info'
 }
