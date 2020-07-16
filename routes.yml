@@ -1,5 +1,5 @@
-{'players#index': '/players/all',
- 'players#show': '/players/:id/info',
- 'items#index': '/items/all',
- 'items#show': '/items/:id/info'
+{'players#index': 'GET/players/all',
+ 'players#show': 'GET/players/:id/info',
+ 'items#index': 'GET/items/all',
+ 'items#show': 'GET/items/:id/info'
 }
