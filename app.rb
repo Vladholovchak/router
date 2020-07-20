@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/node'
 require_relative 'lib/trie'
 require_relative 'lib/result'
@@ -14,8 +16,8 @@ class App
   end
 
   def call(env)
-     route = parse_request(env)
-     route.name.empty? ? default_response : form_response(route)
+    route = parse_request(env)
+    route.name.empty? ? default_response : form_response(route)
   end
 
   def parse_request(env)
@@ -24,15 +26,14 @@ class App
 
   def default_response
     status = 404
-    headers= {"Content-Type" => 'text/plain', "Content-Length" => '13'}
+    headers = { 'Content-Type' => 'text/plain', 'Content-Length' => '13' }
     body = ['404 Not Found']
     [status, headers, body]
   end
 
   def form_response(route)
     value = find_controller_and_action route
-    # [200,{"Content-Type" => 'text/plain'}, [value]]
-    [200,{"Content-Type" => 'text/html'}, [value]]
+    [200, { 'Content-Type' => 'text/html' }, [value]]
   end
 
   def find_controller_and_action(route)

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require_relative '../lib/node'
 require_relative '../lib/trie'
 require_relative '../lib/result'
 
 trie = Trie.new
 
- trie.add_route( 'players#index': 'GET/players/all',
+ trie.add_route('players#index': 'GET/players/all',
                  'players#show': 'POST/players/:id/info',
                  'items#index': 'GET/items/all',
                  'items#show': 'POST/items/:id/info')

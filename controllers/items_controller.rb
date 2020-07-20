@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ItemsController < BasicController
   def index(params)
     @items = Model.new
